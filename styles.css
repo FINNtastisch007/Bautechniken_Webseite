@@ -1,0 +1,74 @@
+.center {
+  display: flex;
+  justify-content: center; /* horizontal */
+  /* align-items: center;     vertikal */
+  height: 100vh;           /* ganze Höhe */
+  margin: 0;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.items div {
+    min-width: 200px;
+    width: 20%;
+    margin: 20px;
+    padding: 20px;
+    background-color: lightgrey;
+    border-radius: 20px;
+    
+}
+
+.items img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.items p {
+    width: 100%;
+    -webkit-hyphens: auto; /* Safari/Chrome */
+    -ms-hyphens: auto;     /* IE/Edge */
+    hyphens: auto;         /* Standard */
+    word-wrap: break-word;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+ .logo {
+    z-index: 0;
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
+    width: 10%;
+    min-width: 100px;
+    /* background-color: rgb(6, 147, 227, 0.2);
+    padding: 10px;
+    border-radius: 10px; */
+}
+
+a {
+  text-decoration: none; /* keine Unterstreichung */
+  color: inherit;        /* normale Textfarbe statt blau */
+}
+
+.canvas {
+  width: 50vw;
+  height: 50vh;
+}
+
+#canvas {
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 10px;
+    border-color: darkgray;
+}
+
+
