@@ -11,7 +11,22 @@ let model_name = canvas.getAttribute("class");
 
 // Szene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0f0f0);
+const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+scene.background = new THREE.Color(
+  darkMode.matches
+    ? 0x707070
+    : 0xf0f0f0
+);
+
+// most unneccesary piece of code ever created
+darkMode.onchange = ({ matches }) => {
+  scene.background = new THREE.Color(
+    matches
+      ? 0x707070
+      : 0xf0f0f0
+  );
+}
+
 
 // Kamera
 const camera = new THREE.PerspectiveCamera(
@@ -25,6 +40,10 @@ camera.position.set(0, 1, 3);
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
+
+window.onresize = (e) => {
+  renderer.setSize(container.clientWidth, container.clientHeight);
+}
 renderer.setPixelRatio(window.devicePixelRatio);
 
 // Licht
