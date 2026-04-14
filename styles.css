@@ -1,9 +1,9 @@
 .center {
-  display: flex;
-  justify-content: center; /* horizontal */
-  /* align-items: center;     vertikal */
-  height: 100vh;           /* ganze Höhe */
-  margin: 0;
+    display: flex;
+    justify-content: center; /* horizontal */
+    /* align-items: center;     vertikal */
+    height: 100vh;           /* ganze Höhe */
+    margin: 0;
 }
 
 h1 {
@@ -24,10 +24,10 @@ h1 {
     padding: 20px;
     background-color: lightgrey;
     border-radius: 20px;
-    
+
 }
 
-.items img{
+.items img {
     width: 100%;
     border-radius: 10px;
 }
@@ -42,7 +42,7 @@ h1 {
 
 }
 
- .logo {
+.logo {
     z-index: 0;
     position: fixed;
     right: 2%;
@@ -55,13 +55,13 @@ h1 {
 }
 
 a {
-  text-decoration: none; /* keine Unterstreichung */
-  color: inherit;        /* normale Textfarbe statt blau */
+    text-decoration: none; /* keine Unterstreichung */
+    color: inherit;        /* normale Textfarbe statt blau */
 }
 
 .canvas {
-  width: 50vw;
-  height: 50vh;
+    width: 50vw;
+    height: 50vh;
 }
 
 #canvas {
@@ -70,6 +70,7 @@ a {
     border-width: 10px;
     border-color: darkgray;
 }
+
 button {
     position: absolute;
     right: 50%;
@@ -79,4 +80,3 @@ button {
     font-size: 200%;
     margin-bottom: 2px;
 }
-
