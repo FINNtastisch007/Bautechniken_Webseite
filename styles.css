@@ -66,6 +66,7 @@ header>a {
 h1 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    margin-inline: calc(2.7rem + 2* 15px);
 }
 
 .items {
