@@ -176,12 +176,15 @@ button {
     margin-bottom: 2px;
 }
 
-.more {
+*:has(+.more) {
     flex-grow: 1;
+}
+
+.more {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    align-items: end;
+    align-items: center;
     height: 2em;
     gap: 0.25em;
 
