@@ -55,7 +55,7 @@ header>a {
         left: 15px;
     }
 
-    &:nth-child(2) {
+    &:has(+*) {
         right: 15px;
     }
 }
