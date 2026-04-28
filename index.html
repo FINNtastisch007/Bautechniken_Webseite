@@ -25,7 +25,7 @@
             const targetLink = document.getElementById(target);
             targetLink.classList.add("selected");
             targetLink.children[0].textContent += "..."
-            setTimeout(() => window.location.href = "/" + target, 500);
+            window.location.href = "/" + target;
         }
     </script>
 </body>

@@ -45,11 +45,18 @@ body {
 header>a {
     position: absolute;
     top: 15px;
-    left: 15px;
 
     &>img {
         width: 2.7em;
         aspect-ratio: 1;
+    }
+
+    &:first-child {
+        left: 15px;
+    }
+
+    &:nth-child(2) {
+        right: 15px;
     }
 }
 
