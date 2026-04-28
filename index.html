@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSG Robots</title>
+</head>
+
+<body>
+    <h1>Welcome</h1>
+
+    <p>You should be redirected to the page for your language, but if you are not, please select here:</p>
+
+    <a href="/de">Deutsch</a>
+    <a href="/en">English</a>
+
+    <script>
+        if (navigator.language.slice(0, 2) === "de") window.location = "/de";
+        else window.location = "/en";
+    </script>
+</body>
+
+</html>
