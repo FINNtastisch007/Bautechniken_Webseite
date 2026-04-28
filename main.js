@@ -65,7 +65,7 @@ let actions = {};
 // Loader
 const loader = new GLTFLoader();
 
-loader.load(model_name, (gltf) => {
+loader.load("/models/" + model_name, (gltf) => {
   const model = gltf.scene;
 
   // Zentrieren + Skalieren
