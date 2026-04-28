@@ -206,3 +206,67 @@ button {
         width: 1.5em;
     }
 }
+
+.langchooser {
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+
+    height: 100dvh;
+    width: 100dvw;
+
+    padding: 10px;
+    gap: 10px;
+
+    &>h1 {
+        margin-bottom: 0;
+    }
+
+    &>p {
+        all: unset;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    &>.langs {
+        flex: 1 1;
+        display: flex;
+        justify-content: stretch;
+        flex-direction: column;
+        gap: 10px;
+
+        &>a {
+            display: flex;
+            flex: 1 1;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+
+            &.selected {
+                --fg: green;
+            }
+
+            background-color: color-mix(in srgb, var(--fg) 10%, var(--bg));
+
+            &:hover {
+                background-color: color-mix(in srgb, var(--fg) 15%, var(--bg));
+
+                &>span {
+                    translate: 0 -0.2em;
+                }
+            }
+
+            &>span {
+                display: inline;
+                font-size: 2em;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@media (width > 1300px) {
+    .langchooser>.langs {
+        flex-direction: row;
+    }
+}

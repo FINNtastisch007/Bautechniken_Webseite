@@ -5,19 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GSG Robots</title>
+
+    <link rel="stylesheet" href="/styles.css">
 </head>
 
-<body>
+<body class="langchooser">
     <h1>Welcome</h1>
-
-    <p>You should be redirected to the page for your language, but if you are not, please select here:</p>
-
-    <a href="/de">Deutsch</a>
-    <a href="/en">English</a>
+    <p>Please choose a language</p>
+    <div class="langs">
+        <a href="/de" id="de"><span>Deutsch</span></a>
+        <a href="/en" id="en"><span>English</span></a>
+    </div>
 
     <script>
-        if (navigator.language.slice(0, 2) === "de") window.location = "/de";
-        else window.location = "/en";
+        const search = new URLSearchParams(window.location.search);
+
+        if (!search.has("noautoredir")) {
+            const target = (navigator.language.slice(0, 2) === "de") ? "de" : "en";
+            const targetLink = document.getElementById(target);
+            targetLink.classList.add("selected");
+            targetLink.children[0].textContent += "..."
+            setTimeout(() => window.location.href = "/" + target, 500);
+        }
     </script>
 </body>
 
