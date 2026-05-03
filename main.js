@@ -11,22 +11,14 @@ let model_name = canvas.getAttribute("class");
 
 // Szene
 const scene = new THREE.Scene();
+
+// Darkmode Background
 const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
-scene.background = new THREE.Color(
-  darkMode.matches
-    ? 0x707070
-    : 0xf0f0f0
-);
-
-// most unneccesary piece of code ever created
-darkMode.onchange = ({ matches }) => {
-  scene.background = new THREE.Color(
-    matches
-      ? 0x707070
-      : 0xf0f0f0
-  );
+function updateBackground(matches) {
+  scene.background = new THREE.Color(matches ? 0x707070 : 0xf0f0f0);
 }
-
+updateBackground(darkMode.matches);
+darkMode.onchange = (e) => updateBackground(e.matches);
 
 // Kamera
 const camera = new THREE.PerspectiveCamera(
@@ -35,15 +27,10 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(0, 1, 3);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
-
-window.onresize = (e) => {
-  renderer.setSize(container.clientWidth, container.clientHeight);
-}
 renderer.setPixelRatio(window.devicePixelRatio);
 
 // Licht
@@ -68,17 +55,32 @@ const loader = new GLTFLoader();
 loader.load("/models/" + model_name, (gltf) => {
   const model = gltf.scene;
 
-  // Zentrieren + Skalieren
+  // Bounding Box berechnen
   const box = new THREE.Box3().setFromObject(model);
-  const size = box.getSize(new THREE.Vector3()).length();
+  const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
 
+  // Modell zentrieren
   model.position.sub(center);
-  model.scale.setScalar(2 / size);
-
   scene.add(model);
 
-  // Animationen parallel starten
+  // === Kamera automatisch anpassen ===
+  const maxDim = Math.max(size.x, size.y, size.z);
+  const fov = camera.fov * (Math.PI / 180);
+
+  let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+  cameraZ *= 1.5; // Abstand etwas erhöhen
+
+  camera.position.set(0, 0, cameraZ);
+  camera.lookAt(0, 0, 0);
+
+  // Controls korrekt setzen
+  controls.target.set(0, 0, 0);
+  controls.minDistance = cameraZ * 0.5;
+  controls.maxDistance = cameraZ * 5;
+  controls.update();
+
+  // === Animationen ===
   if (gltf.animations.length > 0) {
     mixer = new THREE.AnimationMixer(model);
 
@@ -86,8 +88,6 @@ loader.load("/models/" + model_name, (gltf) => {
       const action = mixer.clipAction(clip);
 
       action.play();
-
-      // wichtige Settings für parallele Animation
       action.setLoop(THREE.LoopRepeat);
       action.clampWhenFinished = false;
       action.setEffectiveWeight(1);
@@ -101,14 +101,14 @@ loader.load("/models/" + model_name, (gltf) => {
 });
 
 // Resize
-addEventListener("resize", () => {
+window.addEventListener("resize", () => {
   const width = container.clientWidth;
   const height = container.clientHeight;
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(width, height, false);
+  renderer.setSize(width, height);
 });
 
 // Loop
